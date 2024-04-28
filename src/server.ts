@@ -49,7 +49,6 @@ app.post("/transactions", async (req, res) => {
   const { amount, budget, date, source, title, type }: newActionFormInteface =
     req.body;
   const decimalAmount = parseFloat(String(amount)).toFixed(2);
-  console.log(decimalAmount);
 
   const savedTransation = await new TransactionModel({
     amount: decimalAmount,
@@ -59,7 +58,17 @@ app.post("/transactions", async (req, res) => {
     title,
     type,
   }).save();
+  const transactionBudget = await BudgetModel.findOne({ name: budget });
+  if (transactionBudget) {
+    console.log(transactionBudget);
+    transactionBudget.spent! += Number(decimalAmount);
+    await transactionBudget.save();
+  }
   res.json(savedTransation);
+});
+app.delete("/transactions", async (req, res) => {
+  await TransactionModel.deleteMany();
+  res.send("all transations delted");
 });
 app.post("/sources", async (req, res) => {
   const newSource: sourceInterface = req.body;
@@ -80,9 +89,4 @@ app.post("/budgets", async (req, res) => {
   const newBudget: budgetInterface = req.body;
   const SavedBudget = await new BudgetModel(newBudget).save();
   res.json(SavedBudget);
-});
-
-app.post("/budgets/new", async (req, res) => {
-  const resposnse = await BudgetModel.updateMany({}, { spent: 0 });
-  res.json(resposnse);
 });
