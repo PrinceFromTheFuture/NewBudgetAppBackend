@@ -7,7 +7,9 @@ import SourceModel from "./models/SourceModel.js";
 import BudgetModel from "./models/BudgetModel.js";
 configDotenv();
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: "https://newbudgetappfrontend.onrender.com", // Replace with your frontend domain
+}));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 const port = process.env.PORT || 3000;
