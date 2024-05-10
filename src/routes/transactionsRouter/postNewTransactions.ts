@@ -5,7 +5,7 @@ import { AuthenticatedRequest, newActionFormInteface } from "../../types.js";
 
 const postNewTransaction = async (req: AuthenticatedRequest, res) => {
   const { amount, budget, date, source, title, type }: newActionFormInteface = req.body;
-  const decimalAmount = parseFloat(String(amount)).toFixed(2);
+  const decimalAmount = Number(amount);
 
   const savedTransation = new TransactionModel({
     amount: decimalAmount,
@@ -25,7 +25,7 @@ const postNewTransaction = async (req: AuthenticatedRequest, res) => {
     user: req.user!._id,
   });
 
-  BudgetDocumnet!.categories.find((category) => category.name === budget)!.spent += amount;
+  BudgetDocumnet!.categories.find((category) => category.name === budget)!.spent += decimalAmount;
   await BudgetDocumnet!.save();
   res.json(BudgetDocumnet);
 };

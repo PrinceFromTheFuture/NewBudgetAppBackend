@@ -3,7 +3,7 @@ import BudgetModel from "../../models/BudgetModel.js";
 import TransactionModel from "../../models/transactionModel.js";
 const postNewTransaction = async (req, res) => {
     const { amount, budget, date, source, title, type } = req.body;
-    const decimalAmount = parseFloat(String(amount)).toFixed(2);
+    const decimalAmount = Number(amount);
     const savedTransation = new TransactionModel({
         amount: decimalAmount,
         budget,
@@ -20,7 +20,7 @@ const postNewTransaction = async (req, res) => {
         end: { $gt: now },
         user: req.user._id,
     });
-    BudgetDocumnet.categories.find((category) => category.name === budget).spent += amount;
+    BudgetDocumnet.categories.find((category) => category.name === budget).spent += decimalAmount;
     await BudgetDocumnet.save();
     res.json(BudgetDocumnet);
 };
