@@ -9,7 +9,7 @@ import transactionsRouter from "./routes/transactionsRouter/transactionsRouter.j
 import budgetsRouter from "./routes/budgetsRouter/budgetsRouter.js";
 const app = express();
 const corsOptions = {
-    origin: ["http://localhost:5173", "https://newbudgetappbackend.onrender.com"], // Replace with your frontend
+    origin: ["http://localhost:5173", "https://newbudgetappfrontend.onrender.com/"], // Replace with your frontend
     credentials: true, // Allow credentials
 };
 app.use(cors(corsOptions));
