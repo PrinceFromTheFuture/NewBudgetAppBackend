@@ -3,14 +3,13 @@ import cors from "cors";
 import mongoose from "mongoose";
 import { configDotenv } from "dotenv";
 import SourceModel from "./models/SourceModel.js";
-import BudgetModel from "./models/BudgetModel.js";
 import cookieParser from "cookie-parser";
 import authRouter from "./routes/authRouter.js";
 import transactionsRouter from "./routes/transactionsRouter/transactionsRouter.js";
 import budgetsRouter from "./routes/budgetsRouter/budgetsRouter.js";
 const app = express();
 const corsOptions = {
-    origin: "http://localhost:5174", // Replace with your frontend origin
+    origin: ["http://localhost:5173", "https://newbudgetappbackend.onrender.com"], // Replace with your frontend origin
     credentials: true, // Allow credentials
 };
 app.use(cors(corsOptions));
@@ -47,14 +46,5 @@ app.post("/sources", async (req, res) => {
 app.get("/sources", async (req, res) => {
     const allSources = await SourceModel.find();
     res.json(allSources);
-});
-app.get("/budgets", async (req, res) => {
-    const allBusgets = await BudgetModel.find();
-    res.json(allBusgets);
-});
-app.post("/budgets", async (req, res) => {
-    const newBudget = req.body;
-    const SavedBudget = await new BudgetModel(newBudget).save();
-    res.json(SavedBudget);
 });
 //# sourceMappingURL=server.js.map

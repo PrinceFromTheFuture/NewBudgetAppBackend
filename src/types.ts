@@ -15,12 +15,19 @@ export interface sourceInterface {
   balance: number;
   color: string;
 }
-export interface budgetInterface {
+export interface BudgetCategory {
   name: string;
   spent: number;
   scheduled: number;
   color: string;
 }
+
+export interface budgetInterface {
+  user?: string | User;
+  start: string;
+  end: string;
+  categories: BudgetCategory[];
+}
 export interface AuthenticatedRequest extends Request {
-  user?: User; // This ensures that 'user' property exists on the Request object
+  user: User; // This ensures that 'user' property exists on the Request object
 }
