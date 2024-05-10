@@ -1,3 +1,6 @@
+import { User } from "./models/userModel.js";
+import { Request } from "express";
+
 export interface newActionFormInteface {
   title: string;
   source: string;
@@ -17,4 +20,7 @@ export interface budgetInterface {
   spent: number;
   scheduled: number;
   color: string;
+}
+export interface AuthenticatedRequest extends Request {
+  user?: User; // This ensures that 'user' property exists on the Request object
 }

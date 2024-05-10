@@ -1,4 +1,5 @@
 import mongoose, { model } from "mongoose";
+import UserModel from "./userModel.js";
 
 const transactionSchema = new mongoose.Schema({
   title: String,
@@ -7,6 +8,7 @@ const transactionSchema = new mongoose.Schema({
   amount: Number,
   budget: String,
   source: String,
+  user: { type: mongoose.Schema.ObjectId, ref: UserModel },
 });
 
 const TransactionModel = model("Transaction", transactionSchema);

@@ -1,10 +1,18 @@
-import mongoose, { model } from "mongoose";
+import mongoose, { model, Document } from "mongoose";
+import bcrypt from "bcrypt";
+export interface User extends Document {
+  username: string;
+  password: string;
+}
 
-const userSchema = new mongoose.Schema({
-  budgetFrom: String,
-  BudgetTo: String,
+const userSchema: mongoose.Schema<User> = new mongoose.Schema({
+  username: String,
+  password: String,
 });
 
-const UserModel = model("user", userSchema);
+userSchema.pre<User>("save", async function (next) {
+  this.password = await bcrypt.hash(this.password, 12);
+});
+const UserModel: mongoose.Model<User> = model<User>("user", userSchema);
 
 export default UserModel;
