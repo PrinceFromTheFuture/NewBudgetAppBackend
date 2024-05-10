@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import UserModel from "../models/userModel.js";
+import { UserModel } from "../models/userModel.js";
 import jwtSignToken from "../auth/jwtSignToken.js";
 import jwt from "jsonwebtoken";
 
@@ -13,8 +13,7 @@ interface User extends mongoose.Document {
 }
 
 authRouter.post("/signup", async (req, res) => {
-  const { username, password }: { username: string; password: string } =
-    req.body;
+  const { username, password }: { username: string; password: string } = req.body;
   const userSchema = new UserModel({ username, password });
   const userDocument: User = await userSchema.save();
 
@@ -25,8 +24,7 @@ authRouter.post("/signup", async (req, res) => {
 });
 
 authRouter.post("/signin", async (req, res) => {
-  const { username, password }: { username: string; password: string } =
-    req.body;
+  const { username, password }: { username: string; password: string } = req.body;
   const userDocument: User | null = await UserModel.findOne({ username });
 
   if (!userDocument) {
