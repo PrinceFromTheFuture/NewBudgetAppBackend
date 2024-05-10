@@ -1,14 +1,39 @@
-import mongoose, { model } from "mongoose";
-import { UserModel } from "./userModel.js";
-const transactionSchema = new mongoose.Schema({
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importStar(require("mongoose"));
+const userModel_js_1 = require("./userModel.js");
+const transactionSchema = new mongoose_1.default.Schema({
     title: String,
     type: String,
     date: String,
     amount: Number,
     budget: String,
     source: String,
-    user: { type: mongoose.Schema.ObjectId, ref: UserModel },
+    user: { type: mongoose_1.default.Schema.ObjectId, ref: userModel_js_1.UserModel },
 });
-const TransactionModel = model("Transaction", transactionSchema);
-export default TransactionModel;
+const TransactionModel = (0, mongoose_1.model)("Transaction", transactionSchema);
+exports.default = TransactionModel;
 //# sourceMappingURL=transactionModel.js.map

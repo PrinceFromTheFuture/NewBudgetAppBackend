@@ -1,8 +1,22 @@
-import BudgetModel from "../../models/BudgetModel.js";
-const postNewBudget = async (req, res) => {
-    const newBudget = req.body;
-    const SavedBudget = await new BudgetModel({ ...newBudget, user: req.user._id }).save();
-    res.json(SavedBudget);
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
 };
-export default postNewBudget;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const BudgetModel_js_1 = __importDefault(require("../../models/BudgetModel.js"));
+const postNewBudget = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const newBudget = req.body;
+    const SavedBudget = yield new BudgetModel_js_1.default(Object.assign(Object.assign({}, newBudget), { user: req.user._id })).save();
+    res.json(SavedBudget);
+});
+exports.default = postNewBudget;
 //# sourceMappingURL=postNewBudget.js.map
