@@ -9,7 +9,7 @@ authRouter.post("/signup", async (req, res) => {
     const userSchema = new UserModel({ username, password });
     const userDocument = await userSchema.save();
     const token = jwtSignToken(String(userDocument._id));
-    res.cookie("authToken", token);
+    res.cookie("authToken", token, { maxAge: 1000 * 60 * 60 * 34 * 3 });
     res.json({ username: userDocument.username });
 });
 authRouter.post("/signin", async (req, res) => {
@@ -26,7 +26,7 @@ authRouter.post("/signin", async (req, res) => {
     if (isPasswordValid === true) {
         const token = jwtSignToken(String(userDocument._id));
         console.log(req.body);
-        res.cookie("authToken", token);
+        res.cookie("authToken", token, { maxAge: 1000 * 60 * 60 * 34 * 3 });
         console.log(req.body);
         res.json({ username: userDocument.username });
         console.log(req.body);
