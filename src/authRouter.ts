@@ -27,17 +27,27 @@ authRouter.post("/signin", async (req, res) => {
   const { username, password }: { username: string; password: string } = req.body;
   const userDocument: User | null = await UserModel.findOne({ username });
 
+  console.log(req.body);
+
   if (!userDocument) {
     res.send("erorr");
     return;
   }
+  console.log(req.body);
+
   const isPasswordValid = await bcrypt.compare(password, userDocument.password);
   if (isPasswordValid === true) {
     const token = jwtSignToken(String(userDocument._id));
-    res.cookie("authToken", token, { secure: true });
+    console.log(req.body);
+
+    res.cookie("authToken", token);
+    console.log(req.body);
+
     res.json({ username: userDocument.username });
+    console.log(req.body);
   }
 });
+
 authRouter.get("/verifyToken", async (req, res) => {
   const jwtSecret = process.env.TOKETSECRET;
   const token: string = req.cookies.authToken;
