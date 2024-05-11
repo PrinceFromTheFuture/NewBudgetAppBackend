@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.json());
 
-app.use("/authintication", authRouter);
+app.use("/auth", authRouter);
 app.use("/transactions", transactionsRouter);
 app.use("/budgets", budgetsRouter);
 
