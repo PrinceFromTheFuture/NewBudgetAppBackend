@@ -23,7 +23,9 @@ authRouter.post("/signup", async (req, res) => {
   res.json({ username: userDocument.username });
 });
 
-authRouter.post("/signintest", async (req, res) => {
+authRouter.post("/singin", async (req, res) => {
+  console.log(req.body);
+
   const { username, password }: { username: string; password: string } = req.body;
   const userDocument: User | null = await UserModel.findOne({ username });
 
