@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import BudgetModel from "../../models/BudgetModel.js";
+import BudgetModel from "../../models/budgetModel.js";
 import TransactionModel from "../../models/transactionModel.js";
 const postNewTransaction = async (req, res) => {
     const { amount, budget, date, source, title, type } = req.body;

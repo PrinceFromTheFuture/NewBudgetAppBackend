@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import { configDotenv } from "dotenv";
 import { sourceInterface } from "./types.js";
-import SourceModel from "./models/SourceModel.js";
+import SourceModel from "./models/sourceModel.js";
 import cookieParser from "cookie-parser";
 import transactionsRouter from "./routes/transactionsRouter/transactionsRouter.js";
 import budgetsRouter from "./routes/budgetsRouter/budgetsRouter.js";

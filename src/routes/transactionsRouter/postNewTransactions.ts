@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import BudgetModel from "../../models/BudgetModel.js";
+import BudgetModel from "../../models/budgetModel.js";
 import TransactionModel from "../../models/transactionModel.js";
 import { AuthenticatedRequest, newActionFormInteface } from "../../types.js";
 import { Response } from "express";

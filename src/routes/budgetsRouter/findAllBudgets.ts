@@ -1,4 +1,4 @@
-import BudgetModel from "../../models/BudgetModel.js";
+import BudgetModel from "../../models/budgetModel.js";
 import { Response } from "express";
 import { AuthenticatedRequest } from "../../types.js";
 
