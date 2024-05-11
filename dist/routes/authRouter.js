@@ -41,4 +41,3 @@ authRouter.get("/verifyToken", async (req, res) => {
     }
 });
 export default authRouter;
-//# sourceMappingURL=authRouter.js.map

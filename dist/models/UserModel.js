@@ -8,4 +8,3 @@ userSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, 12);
 });
 export const UserModel = model("user", userSchema);
-//# sourceMappingURL=userModel.js.map

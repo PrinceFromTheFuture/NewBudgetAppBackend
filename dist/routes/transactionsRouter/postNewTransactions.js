@@ -25,4 +25,3 @@ const postNewTransaction = async (req, res) => {
     res.json(BudgetDocumnet);
 };
 export default postNewTransaction;
-//# sourceMappingURL=postNewTransactions.js.map

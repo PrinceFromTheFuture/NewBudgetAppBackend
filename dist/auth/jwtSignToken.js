@@ -7,4 +7,3 @@ const jwtSignToken = (userId) => {
     return token;
 };
 export default jwtSignToken;
-//# sourceMappingURL=jwtSignToken.js.map

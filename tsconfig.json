@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "ES2022",
+    "target": "ESNext",
+    "module": "ESNext",
     "outDir": "./dist",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "Node",
     "rootDir": "./src",
     "esModuleInterop": true,
-    "sourceMap": true,
+    "resolveJsonModule": false,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "noUnusedLocals": true
