@@ -9,8 +9,8 @@ import budgetsRouter from "./routes/budgetsRouter/budgetsRouter.js";
 import authRouter from "./authRouter.js";
 const app = express();
 const corsOptions = {
-    origin: ["http://localhost:5173", "https://newbudgetappfrontend.onrender.com/"], // Replace with your frontend
-    credentials: true, // Allow credentials
+  origin: ["http://localhost:5173", "https://newbudgetappfrontend.onrender.com"], // Replace with your frontend
+  credentials: true, // Allow credentials
 };
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
@@ -23,27 +23,26 @@ app.use("/budgets", budgetsRouter);
 const port = process.env.PORT || 3000;
 const mongoConnectionString = process.env.MONGOUSER;
 const initilizeServer = async () => {
-    app.listen(port, () => {
-        console.log(`server is running on port ${port}`);
-    });
-    if (!mongoConnectionString) {
-        console.log("configure DB env connection string");
-    }
-    else {
-        await mongoose.connect(mongoConnectionString);
-        console.log("connected to DB");
-    }
+  app.listen(port, () => {
+    console.log(`server is running on port ${port}`);
+  });
+  if (!mongoConnectionString) {
+    console.log("configure DB env connection string");
+  } else {
+    await mongoose.connect(mongoConnectionString);
+    console.log("connected to DB");
+  }
 };
 initilizeServer();
 app.get("/", (req, res) => {
-    res.send("BudgetApp backend");
+  res.send("BudgetApp backend");
 });
 app.post("/sources", async (req, res) => {
-    const newSource = req.body;
-    const savedTransation = await new SourceModel(newSource).save();
-    res.json(savedTransation);
+  const newSource = req.body;
+  const savedTransation = await new SourceModel(newSource).save();
+  res.json(savedTransation);
 });
 app.get("/sources", async (req, res) => {
-    const allSources = await SourceModel.find();
-    res.json(allSources);
+  const allSources = await SourceModel.find();
+  res.json(allSources);
 });
