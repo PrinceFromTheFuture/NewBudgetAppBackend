@@ -1,9 +1,10 @@
 import dayjs from "dayjs";
-import BudgetModel from "../../models/BudgetModel.js";
-import TransactionModel from "../../models/transactionModel.js";
-import { AuthenticatedRequest, newActionFormInteface } from "../../types.js";
+import BudgetModel from "@/models/BudgetModel.js";
+import TransactionModel from "@/models/transactionModel.js";
+import { AuthenticatedRequest, newActionFormInteface } from "@/types.js";
+import { Response } from "express";
 
-const postNewTransaction = async (req: AuthenticatedRequest, res) => {
+const postNewTransaction = async (req: AuthenticatedRequest, res: Response) => {
   const { amount, budget, date, source, title, type }: newActionFormInteface = req.body;
   const decimalAmount = Number(amount);
 

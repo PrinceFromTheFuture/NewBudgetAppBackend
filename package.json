@@ -29,8 +29,5 @@
     "tsc": "^2.0.4",
     "typescript": "^5.4.5"
   },
-  "type": "commonjs",
-  "devDependencies": {
-    "@types/cookie-parser": "^1.4.7"
-  }
+  "type": "module"
 }

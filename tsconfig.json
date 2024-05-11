@@ -9,6 +9,10 @@
     "resolveJsonModule": false,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "baseUrl": ".", // Base directory to resolve non-relative module names
+    "paths": {
+      "@/*": ["src/*"] // Maps @/ to src/ directory
+    }
   }
 }

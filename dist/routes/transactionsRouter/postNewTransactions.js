@@ -1,15 +1,10 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const dayjs_1 = __importDefault(require("dayjs"));
-const BudgetModel_js_1 = __importDefault(require("../../models/BudgetModel.js"));
-const transactionModel_js_1 = __importDefault(require("../../models/transactionModel.js"));
+import dayjs from "dayjs";
+import BudgetModel from "@/models/BudgetModel.js";
+import TransactionModel from "@/models/transactionModel.js";
 const postNewTransaction = async (req, res) => {
     const { amount, budget, date, source, title, type } = req.body;
     const decimalAmount = Number(amount);
-    const savedTransation = new transactionModel_js_1.default({
+    const savedTransation = new TransactionModel({
         amount: decimalAmount,
         budget,
         date,
@@ -19,8 +14,8 @@ const postNewTransaction = async (req, res) => {
         user: req.user._id,
     });
     await savedTransation.save();
-    const now = (0, dayjs_1.default)().toString();
-    const BudgetDocumnet = await BudgetModel_js_1.default.findOne({
+    const now = dayjs().toString();
+    const BudgetDocumnet = await BudgetModel.findOne({
         start: { $lt: now },
         end: { $gt: now },
         user: req.user._id,
@@ -29,4 +24,4 @@ const postNewTransaction = async (req, res) => {
     await BudgetDocumnet.save();
     res.json(BudgetDocumnet);
 };
-exports.default = postNewTransaction;
+export default postNewTransaction;

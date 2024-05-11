@@ -1,8 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import { UserModel } from "../models/userModel.js";
-import jwtSignToken from "../auth/jwtSignToken.js";
+import { UserModel } from "@/models/userModel.js";
+import jwtSignToken from "@/auth/jwtSignToken.js";
 import jwt from "jsonwebtoken";
 
 const authRouter = express.Router();

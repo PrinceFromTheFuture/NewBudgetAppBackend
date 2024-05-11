@@ -1,5 +1,5 @@
-import TransactionModel from "../../models/transactionModel.js";
-import { AuthenticatedRequest } from "../../types.js";
+import TransactionModel from "@/models/transactionModel.js";
+import { AuthenticatedRequest } from "@/types.js";
 import { Response } from "express";
 
 const getAllTransactions = async (req: AuthenticatedRequest, res: Response) => {
