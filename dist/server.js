@@ -1,5 +1,4 @@
 import express from "express";
-import cors from "cors";
 import mongoose from "mongoose";
 import { configDotenv } from "dotenv";
 import SourceModel from "./models/sourceModel.js";
@@ -8,12 +7,12 @@ import transactionsRouter from "./routes/transactionsRouter/transactionsRouter.j
 import budgetsRouter from "./routes/budgetsRouter/budgetsRouter.js";
 import authRouter from "./authRouter.js";
 const app = express();
-app.use(cors({ credentials: true }));
 //Enabling CORS
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", `${process.env.FRONTEND}`); // Change this to match your frontend origin
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+    res.header("Access-Control-Allow-Credentials", "true");
     next();
 });
 app.use(express.urlencoded({ extended: false }));
