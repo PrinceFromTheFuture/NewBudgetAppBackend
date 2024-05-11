@@ -10,11 +10,8 @@ import budgetsRouter from "./routes/budgetsRouter/budgetsRouter.js";
 import authRouter from "./authRouter.js";
 
 const app = express();
-const corsOptions = {
-  origin: ["http://localhost:5173", "http://newbudgetappfrontend.onrender.com"], // Replace with your frontend
-  credentials: true, // Allow credentials
-};
-app.use(cors(corsOptions));
+
+app.use(cors({ credentials: true }));
 
 app.use(express.urlencoded({ extended: false }));
 configDotenv();
