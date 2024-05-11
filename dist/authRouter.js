@@ -12,7 +12,7 @@ authRouter.post("/signup", async (req, res) => {
     res.cookie("authToken", token);
     res.json({ username: userDocument.username });
 });
-authRouter.post("/signin", async (req, res) => {
+authRouter.post("/signintest", async (req, res) => {
     const { username, password } = req.body;
     const userDocument = await UserModel.findOne({ username });
     console.log(req.body);
