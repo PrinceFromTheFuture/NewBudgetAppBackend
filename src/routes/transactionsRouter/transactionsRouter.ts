@@ -1,7 +1,7 @@
 import express from "express";
-import authMiddlware from "@/auth/authMiddlware.js";
-import getAllTransactions from "@/routes/transactionsRouter/getAllTransactions.js";
-import postNewTransaction from "@/routes/transactionsRouter/postNewTransactions.js";
+import authMiddlware from "../../auth/authMiddlware.js";
+import getAllTransactions from "./getAllTransactions.js";
+import postNewTransaction from "./postNewTransactions.js";
 
 const transactionsRouter = express.Router();
 

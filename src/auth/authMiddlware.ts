@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { UserModel, User } from "@/models/userModel.js";
+import { UserModel, User } from "../models/userModel.js";
 
 interface AuthenticatedRequest extends Request {
   user?: User; // This ensures that 'user' property exists on the Request object

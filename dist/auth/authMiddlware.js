@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { UserModel } from "@/models/userModel.js";
+import { UserModel } from "../models/userModel.js";
 const authMiddlware = async (req, res, next) => {
     const jwtSecret = process.env.TOKETSECRET;
     const token = req.cookies.authToken;

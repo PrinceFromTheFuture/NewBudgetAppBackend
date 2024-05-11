@@ -2,12 +2,12 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import { configDotenv } from "dotenv";
-import { sourceInterface } from "@/types.js";
-import SourceModel from "@/models/SourceModel.js";
+import { sourceInterface } from "./types.js";
+import SourceModel from "./models/SourceModel.js";
 import cookieParser from "cookie-parser";
-import transactionsRouter from "@/routes/transactionsRouter/transactionsRouter.js";
-import budgetsRouter from "@/routes/budgetsRouter/budgetsRouter.js";
-import authRouter from "@/authRouter.js";
+import transactionsRouter from "./routes/transactionsRouter/transactionsRouter.js";
+import authRouter from "./authRouter.js";
+import budgetsRouter from "./routes/budgetsRouter/budgetsRouter.js";
 const app = express();
 const corsOptions = {
   origin: ["http://localhost:5173", "https://newbudgetappfrontend.onrender.com/"], // Replace with your frontend

@@ -10,9 +10,7 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "noUnusedLocals": true,
-    "baseUrl": ".", // Base directory to resolve non-relative module names
-    "paths": {
-      "@/*": ["src/*"] // Maps @/ to src/ directory
-    }
+
+    "traceResolution": true // Optional: Enables tracing of module resolution for debugging
   }
 }
