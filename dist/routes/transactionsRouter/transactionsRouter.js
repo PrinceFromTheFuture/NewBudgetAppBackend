@@ -6,3 +6,4 @@ const transactionsRouter = express.Router();
 transactionsRouter.get("/", authMiddlware, getAllTransactions);
 transactionsRouter.post("/", authMiddlware, postNewTransaction);
 export default transactionsRouter;
+//# sourceMappingURL=transactionsRouter.js.map

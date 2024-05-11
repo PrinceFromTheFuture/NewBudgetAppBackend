@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "NodeNext",
+    "module": "nodeNext",
     "outDir": "./dist",
     "moduleResolution": "NodeNext",
     "rootDir": "./src",
     "esModuleInterop": true,
-    "resolveJsonModule": false,
+    "sourceMap": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "noUnusedLocals": true,
-
-    "traceResolution": true // Optional: Enables tracing of module resolution for debugging
+    "noUnusedLocals": true
   }
 }

@@ -6,3 +6,4 @@ const budgetsRouter = express.Router();
 budgetsRouter.get("/", authMiddlware, findAllBudgets);
 budgetsRouter.post("/", authMiddlware, postNewBudget);
 export default budgetsRouter;
+//# sourceMappingURL=budgetsRouter.js.map

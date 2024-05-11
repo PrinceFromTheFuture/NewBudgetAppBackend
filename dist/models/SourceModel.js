@@ -6,3 +6,4 @@ const sourceSchema = new mongoose.Schema({
 });
 const SourceModel = model("Source", sourceSchema);
 export default SourceModel;
+//# sourceMappingURL=SourceModel.js.map

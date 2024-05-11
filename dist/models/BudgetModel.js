@@ -1,5 +1,5 @@
 import mongoose, { model } from "mongoose";
-import { UserModel } from "./userModel.js";
+import UserModel from "./userModel.js";
 const budgetSchema = new mongoose.Schema({
     user: { type: mongoose.Types.ObjectId, ref: UserModel },
     start: String,
@@ -15,3 +15,4 @@ const budgetSchema = new mongoose.Schema({
 });
 const BudgetModel = model("Budget", budgetSchema);
 export default BudgetModel;
+//# sourceMappingURL=BudgetModel.js.map

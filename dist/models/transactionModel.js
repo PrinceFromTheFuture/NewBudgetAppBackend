@@ -1,5 +1,5 @@
 import mongoose, { model } from "mongoose";
-import { UserModel } from "./userModel.js";
+import UserModel from "./userModel.js";
 const transactionSchema = new mongoose.Schema({
     title: String,
     type: String,
@@ -11,3 +11,4 @@ const transactionSchema = new mongoose.Schema({
 });
 const TransactionModel = model("Transaction", transactionSchema);
 export default TransactionModel;
+//# sourceMappingURL=transactionModel.js.map

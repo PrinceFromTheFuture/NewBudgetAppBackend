@@ -47,3 +47,4 @@ app.get("/sources", async (req, res) => {
     const allSources = await SourceModel.find();
     res.json(allSources);
 });
+//# sourceMappingURL=server.js.map

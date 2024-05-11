@@ -1,5 +1,5 @@
 import mongoose, { model } from "mongoose";
-import { UserModel } from "./userModel.js";
+import UserModel from "./userModel.js";
 import { budgetInterface } from "../types.js";
 
 const budgetSchema: mongoose.Schema<budgetInterface> = new mongoose.Schema({

@@ -1,12 +1,12 @@
 import express from "express";
 import bcrypt from "bcrypt";
-import { UserModel } from "./models/userModel.js";
+import * as UserModel from "./models/userModel.js";
 import jwtSignToken from "./auth/jwtSignToken.js";
 import jwt from "jsonwebtoken";
 const authRouter = express.Router();
 authRouter.post("/signup", async (req, res) => {
     const { username, password } = req.body;
-    const userSchema = new UserModel({ username, password });
+    const userSchema = new UserModel.default({ username, password });
     const userDocument = await userSchema.save();
     const token = jwtSignToken(String(userDocument._id));
     res.cookie("authToken", token);
@@ -14,7 +14,7 @@ authRouter.post("/signup", async (req, res) => {
 });
 authRouter.post("/signin", async (req, res) => {
     const { username, password } = req.body;
-    const userDocument = await UserModel.findOne({ username });
+    const userDocument = await UserModel.default.findOne({ username });
     if (!userDocument) {
         res.send("erorr");
         return;
@@ -31,7 +31,7 @@ authRouter.get("/verifyToken", async (req, res) => {
     const token = req.cookies.authToken;
     try {
         const decoded = jwt.verify(token, jwtSecret);
-        const user = await UserModel.findById(decoded.userId);
+        const user = await UserModel.default.findById(decoded.userId);
         if (user) {
             res.json({ username: user.username });
         }
@@ -41,3 +41,4 @@ authRouter.get("/verifyToken", async (req, res) => {
     }
 });
 export default authRouter;
+//# sourceMappingURL=authRouter.js.map

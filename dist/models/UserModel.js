@@ -7,4 +7,6 @@ const userSchema = new mongoose.Schema({
 userSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, 12);
 });
-export const UserModel = model("user", userSchema);
+const UserModel = model("user", userSchema);
+export default UserModel;
+//# sourceMappingURL=userModel.js.map
