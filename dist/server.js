@@ -9,10 +9,11 @@ import budgetsRouter from "./routes/budgetsRouter/budgetsRouter.js";
 import authRouter from "./authRouter.js";
 const app = express();
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://newbudgetappfrontend.onrender.com"], // Replace with your frontend
+  origin: ["http://newbudgetappfrontend.onrender.com", "http://localhost:5173"], // Replace with your frontend
   credentials: true, // Allow credentials
 };
 app.use(cors(corsOptions));
+
 app.use(express.urlencoded({ extended: false }));
 configDotenv();
 app.use(cookieParser());
