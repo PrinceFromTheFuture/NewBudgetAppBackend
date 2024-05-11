@@ -1,9 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import * as UserModel from "./models/userModel.js";
 import jwtSignToken from "./auth/jwtSignToken.js";
 import jwt from "jsonwebtoken";
+import UserModel from "./models/userModel.js";
 
 const authRouter = express.Router();
 
@@ -14,7 +14,7 @@ interface User extends mongoose.Document {
 
 authRouter.post("/signup", async (req, res) => {
   const { username, password }: { username: string; password: string } = req.body;
-  const userSchema = new UserModel.default({ username, password });
+  const userSchema = new UserModel({ username, password });
   const userDocument: User = await userSchema.save();
 
   const token = jwtSignToken(String(userDocument._id));
@@ -25,7 +25,7 @@ authRouter.post("/signup", async (req, res) => {
 
 authRouter.post("/signin", async (req, res) => {
   const { username, password }: { username: string; password: string } = req.body;
-  const userDocument: User | null = await UserModel.default.findOne({ username });
+  const userDocument: User | null = await UserModel.findOne({ username });
 
   if (!userDocument) {
     res.send("erorr");
@@ -45,7 +45,7 @@ authRouter.get("/verifyToken", async (req, res) => {
     const decoded: { userId: string } = jwt.verify(token, jwtSecret!) as {
       userId: string;
     };
-    const user = await UserModel.default.findById(decoded.userId);
+    const user = await UserModel.findById(decoded.userId);
     if (user) {
       res.json({ username: user.username });
     }

@@ -4,4 +4,3 @@ const findAllBudgets = async (req, res) => {
     res.json(allBusgets);
 };
 export default findAllBudgets;
-//# sourceMappingURL=findAllBudgets.js.map

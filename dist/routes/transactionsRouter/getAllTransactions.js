@@ -6,4 +6,3 @@ const getAllTransactions = async (req, res) => {
     res.json(allTransactions);
 };
 export default getAllTransactions;
-//# sourceMappingURL=getAllTransactions.js.map

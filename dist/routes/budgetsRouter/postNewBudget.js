@@ -5,4 +5,3 @@ const postNewBudget = async (req, res) => {
     res.json(SavedBudget);
 };
 export default postNewBudget;
-//# sourceMappingURL=postNewBudget.js.map

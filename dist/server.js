@@ -5,8 +5,8 @@ import { configDotenv } from "dotenv";
 import SourceModel from "./models/SourceModel.js";
 import cookieParser from "cookie-parser";
 import transactionsRouter from "./routes/transactionsRouter/transactionsRouter.js";
-import authRouter from "./authRouter.js";
 import budgetsRouter from "./routes/budgetsRouter/budgetsRouter.js";
+import authRouter from "./authRouter.js";
 const app = express();
 const corsOptions = {
     origin: ["http://localhost:5173", "https://newbudgetappfrontend.onrender.com/"], // Replace with your frontend
@@ -47,4 +47,3 @@ app.get("/sources", async (req, res) => {
     const allSources = await SourceModel.find();
     res.json(allSources);
 });
-//# sourceMappingURL=server.js.map

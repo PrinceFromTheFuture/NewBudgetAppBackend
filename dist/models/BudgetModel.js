@@ -15,4 +15,3 @@ const budgetSchema = new mongoose.Schema({
 });
 const BudgetModel = model("Budget", budgetSchema);
 export default BudgetModel;
-//# sourceMappingURL=BudgetModel.js.map

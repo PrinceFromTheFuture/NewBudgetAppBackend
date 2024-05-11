@@ -11,4 +11,3 @@ const transactionSchema = new mongoose.Schema({
 });
 const TransactionModel = model("Transaction", transactionSchema);
 export default TransactionModel;
-//# sourceMappingURL=transactionModel.js.map

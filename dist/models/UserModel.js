@@ -9,4 +9,3 @@ userSchema.pre("save", async function (next) {
 });
 const UserModel = model("user", userSchema);
 export default UserModel;
-//# sourceMappingURL=userModel.js.map

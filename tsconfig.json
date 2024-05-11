@@ -6,7 +6,6 @@
     "moduleResolution": "NodeNext",
     "rootDir": "./src",
     "esModuleInterop": true,
-    "sourceMap": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "noUnusedLocals": true
