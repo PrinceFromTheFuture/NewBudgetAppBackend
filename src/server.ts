@@ -11,7 +11,7 @@ import authRouter from "./authRouter.js";
 
 const app = express();
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://newbudgetappfrontend.onrender.com/"], // Replace with your frontend
+  origin: ["http://localhost:5173", "http://newbudgetappfrontend.onrender.com"], // Replace with your frontend
   credentials: true, // Allow credentials
 };
 app.use(cors(corsOptions));
