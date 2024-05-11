@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import BudgetModel from "../../models/budgetModel.js";
 import TransactionModel from "../../models/transactionModel.js";
 const postNewTransaction = async (req, res) => {
@@ -14,14 +13,12 @@ const postNewTransaction = async (req, res) => {
         user: req.user._id,
     });
     await savedTransation.save();
-    const now = dayjs().toString();
     const BudgetDocumnet = await BudgetModel.findOne({
-        start: { $lt: now },
-        end: { $gt: now },
         user: req.user._id,
     });
     BudgetDocumnet.categories.find((category) => category.name === budget).spent += decimalAmount;
     await BudgetDocumnet.save();
+    console.log(BudgetDocumnet);
     res.json(BudgetDocumnet);
 };
 export default postNewTransaction;
