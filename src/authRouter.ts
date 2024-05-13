@@ -66,4 +66,7 @@ authRouter.get("/verifyToken", async (req, res) => {
   }
 });
 
+authRouter.get("/logout", async (req, res) => {
+  res.clearCookie("authToken");
+});
 export default authRouter;
