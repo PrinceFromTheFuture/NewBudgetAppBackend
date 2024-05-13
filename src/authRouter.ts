@@ -68,7 +68,7 @@ authRouter.get("/verifyToken", async (req, res) => {
 
 authRouter.get("/logout", async (req, res) => {
   res.status(200);
-  res.clearCookie("authToken");
+  res.clearCookie("authToken", { sameSite: "none", secure: true });
   res.send("token Removed");
 });
 export default authRouter;
