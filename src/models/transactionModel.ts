@@ -6,8 +6,9 @@ const transactionSchema = new mongoose.Schema({
   type: String,
   date: String,
   amount: Number,
-  budget: String,
+  budgetCategory: String,
   source: String,
+  budget: String,
   user: { type: mongoose.Schema.ObjectId, ref: UserModel },
 });
 

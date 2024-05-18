@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import transactionsRouter from "./routes/transactionsRouter/transactionsRouter.js";
 import budgetsRouter from "./routes/budgetsRouter/budgetsRouter.js";
 import authRouter from "./authRouter.js";
+import TransactionModel from "./models/transactionModel.js";
 configDotenv();
 
 const app = express();

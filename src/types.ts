@@ -4,9 +4,10 @@ import { Request } from "express";
 export interface newActionFormInteface {
   title: string;
   source: string;
-  budget: string;
+  budgetCategory: string;
   amount: number;
   date: string;
+  username?: string;
   type: string;
 }
 
@@ -14,6 +15,7 @@ export interface sourceInterface {
   name: string;
   balance: number;
   color: string;
+  icon: string;
 }
 export interface BudgetCategory {
   name: string;
