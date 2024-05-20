@@ -7,6 +7,8 @@ import cookieParser from "cookie-parser";
 import transactionsRouter from "./routes/transactionsRouter/transactionsRouter.js";
 import budgetsRouter from "./routes/budgetsRouter/budgetsRouter.js";
 import authRouter from "./authRouter.js";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc.js";
 configDotenv();
 const app = express();
 const frontendIp = process.env.FRONTEND;
@@ -21,6 +23,7 @@ app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/transactions", transactionsRouter);
 app.use("/budgets", budgetsRouter);
+dayjs.extend(utc);
 const port = process.env.PORT || 3000;
 const mongoConnectionString = process.env.MONGOUSER;
 const initilizeServer = async () => {

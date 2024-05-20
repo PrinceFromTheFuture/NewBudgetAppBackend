@@ -9,6 +9,9 @@ import transactionsRouter from "./routes/transactionsRouter/transactionsRouter.j
 import budgetsRouter from "./routes/budgetsRouter/budgetsRouter.js";
 import authRouter from "./authRouter.js";
 import TransactionModel from "./models/transactionModel.js";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc.js";
+
 configDotenv();
 
 const app = express();
@@ -27,6 +30,8 @@ app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/transactions", transactionsRouter);
 app.use("/budgets", budgetsRouter);
+
+dayjs.extend(utc);
 
 const port = process.env.PORT || 3000;
 const mongoConnectionString = process.env.MONGOUSER;
