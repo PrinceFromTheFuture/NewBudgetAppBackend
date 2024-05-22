@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import BudgetModel from "../../models/budgetModel.js";
 import TransactionModel from "../../models/transactionModel.js";
-import { AuthenticatedRequest, newActionFormInteface, sourceInterface } from "../../types.js";
+import { AuthenticatedRequest, Transaction, sourceInterface } from "../../types.js";
 import { Response } from "express";
 import SourceModel from "../../models/sourceModel.js";
 
@@ -11,7 +11,7 @@ const updateTransaction = async (req: AuthenticatedRequest, res: Response) => {
     updatedTransaction: updatedTransaction,
     options,
   }: {
-    updatedTransaction: newActionFormInteface;
+    updatedTransaction: Transaction;
     options: { budgets: boolean; sources: boolean };
   } = req.body;
 
@@ -20,7 +20,7 @@ const updateTransaction = async (req: AuthenticatedRequest, res: Response) => {
   const currentTransaction = await TransactionModel.findById(transactionId);
   if (currentTransaction) {
     if (options.budgets) {
-      const transactionBudget = await BudgetModel.findOne({ user: userId });
+      const transactionBudget = await BudgetModel.findById(currentTransaction.budget);
       if (transactionBudget) {
         transactionBudget.categories.find(
           (category) => category.name === currentTransaction.budgetCategory
@@ -31,6 +31,26 @@ const updateTransaction = async (req: AuthenticatedRequest, res: Response) => {
         )!.spent += Number(updatedTransaction.amount)!;
 
         await transactionBudget.save();
+      }
+    }
+    if (options.sources) {
+      const currentTransactionSource = await SourceModel.findOne({
+        user: userId,
+        name: currentTransaction.source,
+      });
+
+      if (currentTransactionSource) {
+        currentTransactionSource.balance += Number(currentTransaction.amount);
+        await currentTransactionSource.save();
+      }
+      const updatedTransactionSource = await SourceModel.findOne({
+        user: userId,
+        name: updatedTransaction.source,
+      });
+
+      if (updatedTransactionSource) {
+        updatedTransactionSource.balance -= Number(updatedTransaction.amount);
+        await updatedTransactionSource.save();
       }
     }
 

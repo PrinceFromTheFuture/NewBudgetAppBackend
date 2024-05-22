@@ -1,5 +1,6 @@
 import mongoose, { model } from "mongoose";
 import UserModel from "./userModel.js";
+import BudgetModel from "./budgetModel.js";
 const transactionSchema = new mongoose.Schema({
     title: String,
     type: String,
@@ -7,7 +8,7 @@ const transactionSchema = new mongoose.Schema({
     amount: Number,
     budgetCategory: String,
     source: String,
-    budget: String,
+    budget: { type: mongoose.Schema.ObjectId, ref: BudgetModel },
     user: { type: mongoose.Schema.ObjectId, ref: UserModel },
 });
 const TransactionModel = model("Transaction", transactionSchema);

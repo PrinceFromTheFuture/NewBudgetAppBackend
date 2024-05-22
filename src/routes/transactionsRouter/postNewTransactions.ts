@@ -1,10 +1,10 @@
 import BudgetModel from "../../models/budgetModel.js";
 import TransactionModel from "../../models/transactionModel.js";
-import { AuthenticatedRequest, newActionFormInteface } from "../../types.js";
+import { AuthenticatedRequest, Transaction } from "../../types.js";
 import { Response } from "express";
 
 const postNewTransaction = async (req: AuthenticatedRequest, res: Response) => {
-  const { amount, budgetCategory, date, source, title, type }: newActionFormInteface = req.body;
+  const { amount, budgetCategory, date, source, title, type }: Transaction = req.body;
   const decimalAmount = Number(amount);
 
   const savedTransation = new TransactionModel({

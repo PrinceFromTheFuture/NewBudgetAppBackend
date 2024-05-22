@@ -9,6 +9,7 @@ import transactionsRouter from "./routes/transactionsRouter/transactionsRouter.j
 import budgetsRouter from "./routes/budgetsRouter/budgetsRouter.js";
 import authRouter from "./authRouter.js";
 import TransactionModel from "./models/transactionModel.js";
+import dayjs from "dayjs";
 configDotenv();
 
 const app = express();

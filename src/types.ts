@@ -1,14 +1,16 @@
+import mongoose from "mongoose";
 import { User } from "./models/userModel.js";
 import { Request } from "express";
 
-export interface newActionFormInteface {
+export interface Transaction {
   title: string;
   source: string;
   budgetCategory: string;
   amount: number;
   date: string;
-  username?: string;
   type: string;
+  user: string | mongoose.Types.ObjectId;
+  budget: string | mongoose.Types.ObjectId;
 }
 
 export interface sourceInterface {
@@ -16,6 +18,7 @@ export interface sourceInterface {
   balance: number;
   color: string;
   icon: string;
+  user: string | mongoose.Types.ObjectId;
 }
 export interface BudgetCategory {
   name: string;

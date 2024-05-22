@@ -3,7 +3,7 @@ import authMiddlware from "../../auth/authMiddlware.js";
 import getAllTransactions from "./getAllTransactions.js";
 import postNewTransaction from "./postNewTransactions.js";
 import deleteTransaction from "./deleteTransaction.js";
-import updateTransaction from "./upddateTransaction.js";
+import updateTransaction from "./updateTransaction.js";
 
 const transactionsRouter = express.Router();
 
