@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import BudgetModel from "../../models/budgetModel.js";
 import TransactionModel from "../../models/transactionModel.js";
-import { AuthenticatedRequest, Transaction, sourceInterface } from "../../types.js";
+import { AuthenticatedRequest, sourceInterface, Transaction } from "../../types.js";
 import { Response } from "express";
 import SourceModel from "../../models/sourceModel.js";
 
@@ -20,7 +20,7 @@ const updateTransaction = async (req: AuthenticatedRequest, res: Response) => {
   const currentTransaction = await TransactionModel.findById(transactionId);
   if (currentTransaction) {
     if (options.budgets) {
-      const transactionBudget = await BudgetModel.findById(currentTransaction.budget);
+      const transactionBudget = await BudgetModel.findOne({ user: userId });
       if (transactionBudget) {
         transactionBudget.categories.find(
           (category) => category.name === currentTransaction.budgetCategory
@@ -31,6 +31,19 @@ const updateTransaction = async (req: AuthenticatedRequest, res: Response) => {
         )!.spent += Number(updatedTransaction.amount)!;
 
         await transactionBudget.save();
+      }
+      if (options.sources) {
+        const currentTransactionSource = await SourceModel.findOne({
+          name: currentTransaction.source,
+        });
+        currentTransactionSource!.balance += currentTransaction.amount;
+        await currentTransactionSource!.save();
+
+        const updatedTransactionSource = await SourceModel.findOne({
+          name: updatedTransaction.source,
+        });
+        updatedTransactionSource!.balance += updatedTransaction.amount;
+        await updatedTransactionSource!.save();
       }
     }
     if (options.sources) {

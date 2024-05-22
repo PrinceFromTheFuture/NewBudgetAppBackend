@@ -3,20 +3,34 @@ import BudgetModel from "../../models/budgetModel.js";
 import TransactionModel from "../../models/transactionModel.js";
 import { AuthenticatedRequest } from "../../types.js";
 import { Response } from "express";
+import SourceModel from "../../models/sourceModel.js";
 
 const deleteTransaction = async (req: AuthenticatedRequest, res: Response) => {
   const transactionId = new mongoose.Types.ObjectId(req.params.id);
   const { budgets, sources }: { budgets: boolean; sources: boolean } = req.body;
 
-  const userId: string = req.user._id;
-
   const transaction = await TransactionModel.findById(transactionId);
+  if (!transaction) {
+    return res.status(400).send("error couldnt find transaction to delete");
+  }
+
+  if (sources) {
+    const sourceDocument = await SourceModel.findOne({
+      user: req.user._id,
+      name: transaction.source,
+    });
+    if (sourceDocument) {
+      sourceDocument.balance += transaction.amount;
+      await sourceDocument.save();
+    }
+  }
+
   if (budgets) {
-    const associatedBudget = await BudgetModel.findOne({ user: userId });
+    const associatedBudget = await BudgetModel.findById(transaction.budget);
     if (associatedBudget) {
       associatedBudget.categories.find(
         (category) => transaction!.budgetCategory === category.name
-      )!.spent += transaction!.amount!;
+      )!.spent -= transaction!.amount!;
       await associatedBudget.save();
     }
   }
