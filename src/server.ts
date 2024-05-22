@@ -11,6 +11,7 @@ import authRouter from "./authRouter.js";
 import TransactionModel from "./models/transactionModel.js";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc.js";
+import cardsRouter from "./routes/cardsRouter/cardsRouter.js";
 
 configDotenv();
 
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/transactions", transactionsRouter);
 app.use("/budgets", budgetsRouter);
+app.use("/cards", cardsRouter);
 
 dayjs.extend(utc);
 

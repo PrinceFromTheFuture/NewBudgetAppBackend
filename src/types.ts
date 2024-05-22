@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { User } from "./models/userModel.js";
 import { Request } from "express";
 
@@ -10,6 +11,17 @@ export interface newActionFormInteface {
   username?: string;
   type: string;
 }
+
+export interface Card {
+  amountUsed: number;
+  limit: number;
+  name: string;
+  associatedSource: string | mongoose.Schema.Types.ObjectId;
+  user: string | mongoose.Schema.Types.ObjectId;
+  resetDay: number;
+}
+
+export type CardDocument = mongoose.Document & Card;
 
 export interface sourceInterface {
   name: string;
