@@ -1,22 +1,29 @@
 import mongoose, { model, Document } from "mongoose";
 import SourceModel from "./sourceModel.js";
+import UserModel from "./userModel.js";
+import { CardDocument } from "../types.js";
 
-export interface Card extends Document {
-  amountUsed: number;
-  associatedSource: string | mongoose.Schema.Types.ObjectId;
-  ResetDay: number;
-}
-
-const userSchema: mongoose.Schema<Card> = new mongoose.Schema({
+const cardSchema: mongoose.Schema<CardDocument> = new mongoose.Schema({
   amountUsed: { type: Number, required: true },
+  name: { type: String, required: true },
+  limit: { type: Number, required: true },
+
   associatedSource: {
     type: mongoose.Schema.Types.ObjectId,
     ref: SourceModel,
     required: true,
   },
-  ResetDay: { type: Number, required: true },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: UserModel,
+    required: true,
+  },
+  resetDay: { type: Number, required: true },
 });
 
-const UserModel: mongoose.Model<Card> = model<Card>("user", userSchema);
+const CardModel: mongoose.Model<CardDocument> = model<CardDocument>(
+  "card",
+  cardSchema
+);
 
-export default UserModel;
+export default CardModel;
