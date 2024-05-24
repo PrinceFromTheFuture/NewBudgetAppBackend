@@ -30,7 +30,6 @@ authRouter.post("/signup", async (req, res) => {
 authRouter.post("/signin", async (req, res) => {
   const { username, password }: { username: string; password: string } = req.body;
   const userDocument: User | null = await UserModel.findOne({ username });
-
   if (!userDocument) {
     res.send("erorr");
     return;
@@ -42,8 +41,8 @@ authRouter.post("/signin", async (req, res) => {
 
     res.cookie("authToken", token, {
       maxAge: 1000 * 60 * 60 * 34 * 3,
-      sameSite: "none",
-      secure: true,
+      sameSite: "strict",
+      secure: false,
     });
 
     res.json({ username: userDocument.username });
@@ -62,6 +61,8 @@ authRouter.get("/verifyToken", async (req, res) => {
       res.json({ username: user.username });
     }
   } catch (e) {
+    console.log(req.cookies);
+
     res.send("you are not llooged In");
   }
 });

@@ -26,10 +26,10 @@ app.use("/transactions", transactionsRouter);
 app.use("/budgets", budgetsRouter);
 app.use("/cards", cardsRouter);
 dayjs.extend(utc);
-const port = process.env.PORT || 3000;
+const port = "3000";
 const mongoConnectionString = process.env.MONGOUSER;
 const initilizeServer = async () => {
-    app.listen(port, () => {
+    app.listen(3000, "192.168.1.111", () => {
         console.log(`server is running on port ${port}`);
     });
     if (!mongoConnectionString) {
@@ -38,6 +38,12 @@ const initilizeServer = async () => {
     else {
         await mongoose.connect(mongoConnectionString);
         console.log("connected to DB");
+        await new SourceModel({
+            user: new mongoose.Types.ObjectId("663b6150c923f8b97c65d341"),
+            balance: 0,
+            name: "stocks",
+            color: "#B69AD0",
+        }).save();
     }
 };
 initilizeServer();

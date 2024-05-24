@@ -4,6 +4,7 @@ import TransactionModel from "../../models/transactionModel.js";
 import { AuthenticatedRequest } from "../../types.js";
 import { Response } from "express";
 import SourceModel from "../../models/sourceModel.js";
+import CardModel from "../../models/cardModel.js";
 
 const deleteTransaction = async (req: AuthenticatedRequest, res: Response) => {
   const transactionId = new mongoose.Types.ObjectId(req.params.id);
@@ -15,13 +16,17 @@ const deleteTransaction = async (req: AuthenticatedRequest, res: Response) => {
   }
 
   if (sources) {
-    const sourceDocument = await SourceModel.findOne({
-      user: req.user._id,
-      name: transaction.source,
-    });
-    if (sourceDocument) {
-      sourceDocument.balance += transaction.amount;
-      await sourceDocument.save();
+    if (transaction.source) {
+      const sourceDocument = await SourceModel.findById(transaction.source);
+      if (sourceDocument) {
+        sourceDocument.balance += transaction.amount;
+        await sourceDocument.save();
+      }
+    }
+    if (transaction.card) {
+      const cardDocument = await CardModel.findById(transaction.card);
+      cardDocument!.amountUsed -= transaction.amount;
+      await cardDocument!.save();
     }
   }
 

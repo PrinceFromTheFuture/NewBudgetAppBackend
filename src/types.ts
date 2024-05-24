@@ -3,8 +3,9 @@ import { User } from "./models/userModel.js";
 import { Request } from "express";
 
 export interface Transaction {
+  card?: string | mongoose.Types.ObjectId;
   title: string;
-  source: string;
+  source?: string;
   budgetCategory: string;
   amount: number;
   date: string;

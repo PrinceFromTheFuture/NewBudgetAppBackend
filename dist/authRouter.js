@@ -28,8 +28,8 @@ authRouter.post("/signin", async (req, res) => {
         const token = jwtSignToken(String(userDocument._id));
         res.cookie("authToken", token, {
             maxAge: 1000 * 60 * 60 * 34 * 3,
-            sameSite: "none",
-            secure: true,
+            sameSite: "strict",
+            secure: false,
         });
         res.json({ username: userDocument.username });
     }
@@ -45,6 +45,7 @@ authRouter.get("/verifyToken", async (req, res) => {
         }
     }
     catch (e) {
+        console.log(req.cookies);
         res.send("you are not llooged In");
     }
 });
