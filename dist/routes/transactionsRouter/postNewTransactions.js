@@ -2,7 +2,7 @@ import BudgetModel from "../../models/budgetModel.js";
 import TransactionModel from "../../models/transactionModel.js";
 import SourceModel from "../../models/sourceModel.js";
 const postNewTransaction = async (req, res) => {
-    const { amount, budgetCategory, date, source, title, type, } = req.body;
+    const { amount, budgetCategory, date, source, title, type } = req.body;
     const decimalAmount = Number(amount);
     const BudgetDocumnet = await BudgetModel.findOne({
         user: req.user._id,
@@ -26,7 +26,8 @@ const postNewTransaction = async (req, res) => {
         sourceDocument.balance -= decimalAmount;
         await sourceDocument.save();
     }
-    BudgetDocumnet.categories.find((category) => category.name === budgetCategory).spent += decimalAmount;
+    BudgetDocumnet.categories.find((category) => category.name === budgetCategory).spent +=
+        decimalAmount;
     await BudgetDocumnet.save();
     res.json(BudgetDocumnet);
 };

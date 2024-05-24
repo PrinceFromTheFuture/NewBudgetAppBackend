@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import BudgetModel from "../../models/budgetModel.js";
 import TransactionModel from "../../models/transactionModel.js";
-import { AuthenticatedRequest, sourceInterface, Transaction } from "../../types.js";
+import { AuthenticatedRequest, Transaction } from "../../types.js";
 import { Response } from "express";
 import SourceModel from "../../models/sourceModel.js";
 

@@ -9,11 +9,23 @@ const updateTransaction = async (req, res) => {
     const currentTransaction = await TransactionModel.findById(transactionId);
     if (currentTransaction) {
         if (options.budgets) {
-            const transactionBudget = await BudgetModel.findById(currentTransaction.budget);
+            const transactionBudget = await BudgetModel.findOne({ user: userId });
             if (transactionBudget) {
                 transactionBudget.categories.find((category) => category.name === currentTransaction.budgetCategory).spent -= currentTransaction.amount;
                 transactionBudget.categories.find((category) => category.name === updatedTransaction.budgetCategory).spent += Number(updatedTransaction.amount);
                 await transactionBudget.save();
+            }
+            if (options.sources) {
+                const currentTransactionSource = await SourceModel.findOne({
+                    name: currentTransaction.source,
+                });
+                currentTransactionSource.balance += currentTransaction.amount;
+                await currentTransactionSource.save();
+                const updatedTransactionSource = await SourceModel.findOne({
+                    name: updatedTransaction.source,
+                });
+                updatedTransactionSource.balance += updatedTransaction.amount;
+                await updatedTransactionSource.save();
             }
         }
         if (options.sources) {
