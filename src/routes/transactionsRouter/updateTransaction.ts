@@ -32,34 +32,26 @@ const updateTransaction = async (req: AuthenticatedRequest, res: Response) => {
 
         await transactionBudget.save();
       }
+
       if (options.sources) {
-        const currentTransactionSource = await SourceModel.findOne({
-          name: currentTransaction.source,
-        });
+        const currentTransactionSource = await SourceModel.findById(currentTransaction.source);
         currentTransactionSource!.balance += currentTransaction.amount;
         await currentTransactionSource!.save();
 
-        const updatedTransactionSource = await SourceModel.findOne({
-          name: updatedTransaction.source,
-        });
+        const updatedTransactionSource = await SourceModel.findById(updatedTransaction.source);
         updatedTransactionSource!.balance += updatedTransaction.amount;
         await updatedTransactionSource!.save();
       }
     }
     if (options.sources) {
-      const currentTransactionSource = await SourceModel.findOne({
-        user: userId,
-        name: currentTransaction.source,
-      });
+      const currentTransactionSource = await SourceModel.findById(currentTransaction.source);
 
       if (currentTransactionSource) {
+        console.log(currentTransactionSource);
         currentTransactionSource.balance += Number(currentTransaction.amount);
         await currentTransactionSource.save();
       }
-      const updatedTransactionSource = await SourceModel.findOne({
-        user: userId,
-        name: updatedTransaction.source,
-      });
+      const updatedTransactionSource = await SourceModel.findById(updatedTransaction.source);
 
       if (updatedTransactionSource) {
         updatedTransactionSource.balance -= Number(updatedTransaction.amount);
@@ -71,7 +63,7 @@ const updateTransaction = async (req: AuthenticatedRequest, res: Response) => {
     currentTransaction.amount = updatedTransaction.amount;
     currentTransaction.budgetCategory = updatedTransaction.budgetCategory;
     currentTransaction.date = updatedTransaction.date;
-    currentTransaction.source = updatedTransaction.source;
+    currentTransaction.source = new mongoose.Types.ObjectId(updatedTransaction.source);
     currentTransaction.type = updatedTransaction.type;
     await currentTransaction.save();
   }

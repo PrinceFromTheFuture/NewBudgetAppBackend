@@ -38,12 +38,6 @@ const initilizeServer = async () => {
     else {
         await mongoose.connect(mongoConnectionString);
         console.log("connected to DB");
-        await new SourceModel({
-            user: new mongoose.Types.ObjectId("663b6150c923f8b97c65d341"),
-            balance: 0,
-            name: "stocks",
-            color: "#B69AD0",
-        }).save();
     }
 };
 initilizeServer();
